@@ -1,6 +1,7 @@
 package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
+import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,11 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-        return null;
+        boolean isAdded = questions.add(question);
+        if (!isAdded) {
+            throw new QuestionAlreadyAddedException();
+        }
+        return question;
     }
 
     @Override

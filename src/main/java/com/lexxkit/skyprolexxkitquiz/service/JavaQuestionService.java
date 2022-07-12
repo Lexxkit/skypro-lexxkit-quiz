@@ -5,10 +5,8 @@ import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class JavaQuestionService implements QuestionService {
@@ -24,7 +22,8 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-        return null;
+        Question newQuestion = new Question(question, answer);
+        return add(newQuestion);
     }
 
     @Override
@@ -52,6 +51,15 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
+        if (questions.size() == 0) {
+            throw new JavaQuestionsIsEmptyException();
+        }
+        int index = new Random().nextInt(questions.size());
+        return getQuestionByIndex(index);
+    }
+
+    private Question getQuestionByIndex(int index) {
+
         return null;
     }
 

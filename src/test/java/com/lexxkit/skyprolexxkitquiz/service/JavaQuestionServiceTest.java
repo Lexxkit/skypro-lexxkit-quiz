@@ -33,8 +33,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldThrowQuestionAlreadyAddedExceptionWhenAddSameQuestionWithFields() {
-        out.add(TEST_QUESTION_STRING, TEST_ANSWER_STRING);
-        assertThatThrownBy(() -> out.add(TEST_QUESTION_STRING, TEST_ANSWER_STRING)).isInstanceOf(QuestionAlreadyAddedException.class);
+        assertThatThrownBy(() -> out.add(TEST_QUESTION_1.getQuestion(), TEST_QUESTION_1.getAnswer())).isInstanceOf(QuestionAlreadyAddedException.class);
     }
 
 

@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 
 import static com.lexxkit.skyprolexxkitquiz.service.QuestionServiceTestConstants.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class JavaQuestionServiceTest {
 
@@ -65,7 +64,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void shouldThrowQuestionNotFoundExceptionWhenRemoveNonExistentQuestion() {
-        assertThatThrownBy(() -> out.remove(NON_EXISTENT_QUESTION_1)).isInstanceOf(QuestionNotFoundException.class);
+        assertThatExceptionOfType(QuestionNotFoundException.class).isThrownBy(() -> out.remove(NON_EXISTENT_QUESTION_1));
     }
 
     @Test

@@ -56,7 +56,6 @@ public class JavaQuestionService implements QuestionService {
             throw new JavaQuestionsIsEmptyException();
         }
         int index = new Random().nextInt(questions.size());
-        System.out.println(index);
         return getQuestionByIndex(index);
     }
 

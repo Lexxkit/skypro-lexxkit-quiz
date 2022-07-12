@@ -1,6 +1,7 @@
 package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
+import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,4 +77,17 @@ class JavaQuestionServiceTest {
         assertThat(result).containsAll(TEST_SET_SIZE_2);
     }
 
+    @Test
+    void shouldReturnRandomQuestionFromSet() {
+        Question result = out.getRandomQuestion();
+
+        assertThat(result).isInstanceOf(Question.class);
+        assertThat(result).isIn(TEST_SET_SIZE_2);
+    }
+
+    @Test
+    void shouldThrowJavaQuestionsIsEmptyExceptionWhenSetIsEmpty() {
+        out = new JavaQuestionService();
+        assertThatThrownBy(() -> out.getRandomQuestion()).isInstanceOf(JavaQuestionsIsEmptyException.class);
+    }
 }

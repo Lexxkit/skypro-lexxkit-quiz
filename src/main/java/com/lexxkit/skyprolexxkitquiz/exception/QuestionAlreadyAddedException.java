@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class QuestionAlreadyAddedException extends RuntimeException {
     public QuestionAlreadyAddedException() {
-        super();
     }
 
     public QuestionAlreadyAddedException(String message) {
@@ -19,9 +18,5 @@ public class QuestionAlreadyAddedException extends RuntimeException {
 
     public QuestionAlreadyAddedException(Throwable cause) {
         super(cause);
-    }
-
-    protected QuestionAlreadyAddedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

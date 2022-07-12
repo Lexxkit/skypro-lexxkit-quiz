@@ -1,6 +1,7 @@
 package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
+import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.springframework.stereotype.Service;
@@ -55,18 +56,14 @@ public class JavaQuestionService implements QuestionService {
             throw new JavaQuestionsIsEmptyException();
         }
         int index = new Random().nextInt(questions.size());
+        System.out.println(index);
         return getQuestionByIndex(index);
     }
 
     private Question getQuestionByIndex(int index) {
-
-        return null;
+        if (index < 0 || index >= questions.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return new ArrayList<>(questions).get(index);
     }
-
-//    private Question findQuestion(Question question) {
-//        return questions.stream()
-//                .filter(e -> e.equals(question))
-//                .findFirst()
-//                .orElseThrow(() -> new QuestionNotFoundException());
-//    }
 }

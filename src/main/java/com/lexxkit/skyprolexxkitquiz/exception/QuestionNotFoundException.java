@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class QuestionNotFoundException extends RuntimeException {
     public QuestionNotFoundException() {
-        super();
     }
 
     public QuestionNotFoundException(String message) {
@@ -19,9 +18,5 @@ public class QuestionNotFoundException extends RuntimeException {
 
     public QuestionNotFoundException(Throwable cause) {
         super(cause);
-    }
-
-    protected QuestionNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

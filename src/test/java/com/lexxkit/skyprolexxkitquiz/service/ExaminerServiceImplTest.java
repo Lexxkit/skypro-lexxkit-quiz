@@ -9,12 +9,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.Set;
 
 import static com.lexxkit.skyprolexxkitquiz.service.QuestionServiceTestConstants.*;
-import static com.lexxkit.skyprolexxkitquiz.service.QuestionServiceTestConstants.TEST_SET_SIZE_2;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,5 +50,7 @@ class ExaminerServiceImplTest {
         Collection<Question> result = out.getQuestions(2);
         assertThat(result).hasSize(2);
         assertThat(result).containsExactlyInAnyOrder(TEST_QUESTION_1, TEST_QUESTION_3);
+        assertThat(result).isUnmodifiable();
+        assertThat(result).isInstanceOf(Set.class);
     }
 }

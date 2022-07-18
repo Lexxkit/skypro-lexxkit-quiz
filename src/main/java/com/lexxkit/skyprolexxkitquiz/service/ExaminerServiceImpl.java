@@ -22,7 +22,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         }
 
         int questionsSize = questionService.getAll().size();
-        if (questionsSize < amount) {
+        if (amount > questionsSize) {
             throw new NotEnoughQuestionsException();
         }
 

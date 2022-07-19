@@ -2,11 +2,15 @@ package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
+import com.lexxkit.skyprolexxkitquiz.exception.MathQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class MathQuestionService implements QuestionService {
     private final Set<Question> questions;
 
@@ -50,7 +54,7 @@ public class MathQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         if (questions.size() == 0) {
-            throw new JavaQuestionsIsEmptyException();
+            throw new MathQuestionsIsEmptyException();
         }
         int index = new Random().nextInt(questions.size());
         return getQuestionByIndex(index);

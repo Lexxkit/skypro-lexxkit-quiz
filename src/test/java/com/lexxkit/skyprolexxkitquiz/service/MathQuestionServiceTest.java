@@ -2,6 +2,7 @@ package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
+import com.lexxkit.skyprolexxkitquiz.exception.MathQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -84,8 +85,8 @@ class MathQuestionServiceTest {
     }
 
     @Test
-    void shouldThrowJavaQuestionsIsEmptyExceptionWhenSetIsEmpty() {
+    void shouldThrowMathQuestionsIsEmptyExceptionWhenSetIsEmpty() {
         out = new MathQuestionService();
-        assertThatThrownBy(() -> out.getRandomQuestion()).isInstanceOf(JavaQuestionsIsEmptyException.class);
+        assertThatThrownBy(() -> out.getRandomQuestion()).isInstanceOf(MathQuestionsIsEmptyException.class);
     }
 }

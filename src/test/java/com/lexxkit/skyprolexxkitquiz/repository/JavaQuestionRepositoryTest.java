@@ -1,7 +1,6 @@
-package com.lexxkit.skyprolexxkitquiz.service;
+package com.lexxkit.skyprolexxkitquiz.repository;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
-import com.lexxkit.skyprolexxkitquiz.exception.MathQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,29 +11,14 @@ import java.util.Collection;
 import static com.lexxkit.skyprolexxkitquiz.QuestionServiceTestConstants.*;
 import static org.assertj.core.api.Assertions.*;
 
-class MathQuestionServiceTest {
-    private QuestionService out;
+class JavaQuestionRepositoryTest {
+
+    private QuestionRepository out;
 
     @BeforeEach
     void setUp() {
-        out = new MathQuestionService(TEST_SET_SIZE_2);
+        out = new JavaQuestionRepository(TEST_SET_SIZE_2);
     }
-
-    @Test
-    void shouldAddQuestionWithFieldsNotInSetAndReturnIt() {
-        int initialSize = out.getAll().size();
-        Question result = out.add(TEST_QUESTION_STRING, TEST_ANSWER_STRING);
-
-        assertThat(result).isEqualTo(TEST_QUESTION_FROM_STRINGS);
-        assertThat(out.getAll()).hasSize(initialSize + 1);
-        assertThat(out.getAll()).contains(TEST_QUESTION_FROM_STRINGS);
-    }
-
-    @Test
-    void shouldThrowQuestionAlreadyAddedExceptionWhenAddSameQuestionWithFields() {
-        assertThatThrownBy(() -> out.add(TEST_QUESTION_1.getQuestion(), TEST_QUESTION_1.getAnswer())).isInstanceOf(QuestionAlreadyAddedException.class);
-    }
-
 
     @Test
     void shouldAddQuestionNotInSetAndReturnIt() {
@@ -73,19 +57,5 @@ class MathQuestionServiceTest {
         assertThat(result).isUnmodifiable();
         assertThat(result).hasSize(TEST_SET_SIZE_2.size());
         assertThat(result).containsAll(TEST_SET_SIZE_2);
-    }
-
-    @Test
-    void shouldReturnRandomQuestionFromSet() {
-        Question result = out.getRandomQuestion();
-
-        assertThat(result).isInstanceOf(Question.class);
-        assertThat(result).isIn(TEST_SET_SIZE_2);
-    }
-
-    @Test
-    void shouldThrowMathQuestionsIsEmptyExceptionWhenSetIsEmpty() {
-        out = new MathQuestionService();
-        assertThatThrownBy(() -> out.getRandomQuestion()).isInstanceOf(MathQuestionsIsEmptyException.class);
     }
 }

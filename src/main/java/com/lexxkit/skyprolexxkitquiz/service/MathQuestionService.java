@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
     private final Set<Question> questions;
 

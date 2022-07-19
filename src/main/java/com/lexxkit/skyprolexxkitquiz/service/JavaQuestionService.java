@@ -5,16 +5,18 @@ import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import com.lexxkit.skyprolexxkitquiz.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Qualifier("javaQuestionService")
 public class JavaQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
 
-    public JavaQuestionService(QuestionRepository questionRepository) {
+    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 

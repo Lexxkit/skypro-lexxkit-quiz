@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final QuestionService javaQuestionService;
+    private final List<QuestionService> questionServiceList;
 
-    public ExaminerServiceImpl(QuestionService javaQuestionService) {
-        this.javaQuestionService = javaQuestionService;
+    public ExaminerServiceImpl(List<QuestionService> questionServiceList) {
+        this.questionServiceList = questionServiceList;
     }
 
     @Override
@@ -22,15 +24,17 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new BadAmountOfQuestionsException();
         }
 
-        int questionsSize = javaQuestionService.getAll().size();
-        if (amount > questionsSize) {
+        int numOfAllQuestions = questionServiceList.stream().mapToInt(e -> e.getAll().size()).sum();
+
+        if (amount > numOfAllQuestions) {
             throw new NotEnoughQuestionsException();
         }
 
         Set<Question> randomQuestions = new HashSet<>();
 
         while (randomQuestions.size() < amount) {
-            randomQuestions.add(javaQuestionService.getRandomQuestion());
+            QuestionService randQuestionService = questionServiceList.get(new Random().nextInt(questionServiceList.size()));
+            randomQuestions.add(randQuestionService.getRandomQuestion());
         }
         return Collections.unmodifiableSet(randomQuestions);
     }

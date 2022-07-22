@@ -3,6 +3,7 @@ package com.lexxkit.skyprolexxkitquiz.repository;
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -23,10 +24,12 @@ public class JavaQuestionRepository implements QuestionRepository {
         this.questions = questions;
     }
 
-    // TODO: 19.07.2022 Add @PostConstruct void init and fill in repository with questions
     @PostConstruct
     private void init() {
         questions.add(new Question("Test 1", "Answer Test 1"));
+        questions.add(new Question("Test 2", "Answer Test 2"));
+        questions.add(new Question("Test 3", "Answer Test 3"));
+        questions.add(new Question("Test 4", "Answer Test 4"));
     }
 
     @Override

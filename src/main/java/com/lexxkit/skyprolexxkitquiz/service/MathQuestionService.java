@@ -1,13 +1,13 @@
 package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
-import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
-import com.lexxkit.skyprolexxkitquiz.exception.MathQuestionsIsEmptyException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
+import com.lexxkit.skyprolexxkitquiz.exception.*;
 import com.lexxkit.skyprolexxkitquiz.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.MethodNotAllowedException;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -15,12 +15,6 @@ import java.util.*;
 @Service
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
-    private final QuestionRepository questionRepository;
-
-    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
-
     @Override
     public Question add(String question, String answer) {
         Question newQuestion = new Question(question, answer);
@@ -29,33 +23,34 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-        return questionRepository.add(question);
+        throw new CustomMethodNotAllowedException();
     }
 
     @Override
     public Question remove(Question question) {
-        return questionRepository.remove(question);
+        throw new CustomMethodNotAllowedException();
     }
 
     @Override
     public Collection<Question> getAll() {
-        return questionRepository.getAll();
+        throw new CustomMethodNotAllowedException();
     }
 
     @Override
     public Question getRandomQuestion() {
-        int repositorySize = questionRepository.getAll().size();
-        if (repositorySize == 0) {
-            throw new MathQuestionsIsEmptyException();
-        }
-        int index = new Random().nextInt(repositorySize);
-        return getQuestionByIndex(index);
+//        int repositorySize = questionRepository.getAll().size();
+//        if (repositorySize == 0) {
+//            throw new MathQuestionsIsEmptyException();
+//        }
+//        int index = new Random().nextInt(repositorySize);
+//        return getQuestionByIndex(index);
+        return null;
     }
-
-    private Question getQuestionByIndex(int index) {
-        if (index < 0 || index >= questionRepository.getAll().size()) {
-            throw new IndexOutOfBoundsException();
-        }
-        return new ArrayList<>(questionRepository.getAll()).get(index);
-    }
+//
+//    private Question getQuestionByIndex(int index) {
+//        if (index < 0 || index >= questionRepository.getAll().size()) {
+//            throw new IndexOutOfBoundsException();
+//        }
+//        return new ArrayList<>(questionRepository.getAll()).get(index);
+//    }
 }

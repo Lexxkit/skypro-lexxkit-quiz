@@ -3,7 +3,6 @@ package com.lexxkit.skyprolexxkitquiz.repository;
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
 import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;

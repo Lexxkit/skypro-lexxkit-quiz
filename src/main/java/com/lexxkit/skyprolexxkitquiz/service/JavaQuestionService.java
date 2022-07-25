@@ -2,14 +2,13 @@ package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
 import com.lexxkit.skyprolexxkitquiz.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
 
 @Service
 @Qualifier("javaQuestionService")

@@ -10,8 +10,4 @@ public interface QuestionRepository {
     Question remove(Question question);
 
     Collection<Question> getAll();
-
-// TODO: 19.07.2022 Maybe unnecessary code
-//    Question getQuestionByIndex(int index);
-//    int getSize();
 }

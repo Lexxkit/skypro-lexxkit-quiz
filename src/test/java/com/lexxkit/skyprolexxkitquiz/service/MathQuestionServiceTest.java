@@ -32,22 +32,5 @@ class MathQuestionServiceTest {
     @Test
     void shouldThrowCustomMethodNotAllowedExceptionWhenGetAllQuestions() {
         assertThatExceptionOfType(CustomMethodNotAllowedException.class).isThrownBy(() -> out.getAll());
-
     }
-
-//    @Test
-//    void shouldReturnRandomQuestionFromSet() {
-//        when(repository.getAll()).thenReturn(TEST_SET_SIZE_2);
-//
-//        Question result = out.getRandomQuestion();
-//
-//        assertThat(result).isInstanceOf(Question.class);
-//        assertThat(result).isIn(TEST_SET_SIZE_2);
-//    }
-//
-//    @Test
-//    void shouldThrowMathQuestionsIsEmptyExceptionWhenSetIsEmpty() {
-//        when(repository.getAll()).thenReturn(Collections.emptySet());
-//        assertThatThrownBy(() -> out.getRandomQuestion()).isInstanceOf(MathQuestionsIsEmptyException.class);
-//    }
 }

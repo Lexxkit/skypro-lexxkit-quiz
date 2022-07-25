@@ -1,4 +1,4 @@
-package com.lexxkit.skyprolexxkitquiz.service;
+package com.lexxkit.skyprolexxkitquiz;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 

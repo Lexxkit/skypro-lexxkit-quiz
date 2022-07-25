@@ -19,4 +19,5 @@ Returns list of all questions and answers from the inner storage.
 
 4. <ins>/exam/get/{number}</ins>
 
-Returns a list of desired number of questions picked randomly from the app inner storage. If {number} <= 0 or {number} > amount of questions in the app - 400 status (Bad Request) will be thrown. 
+Returns a list of desired number of questions. Java questions are selected randomly from the app's inner storage, Math questions are generated automatically.
+If {number} <= 0 - 400 status (Bad Request) will be thrown. 

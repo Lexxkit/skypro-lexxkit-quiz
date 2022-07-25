@@ -2,23 +2,21 @@ package com.lexxkit.skyprolexxkitquiz.service;
 
 import com.lexxkit.skyprolexxkitquiz.domain.Question;
 import com.lexxkit.skyprolexxkitquiz.exception.JavaQuestionsIsEmptyException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionAlreadyAddedException;
-import com.lexxkit.skyprolexxkitquiz.exception.QuestionNotFoundException;
+import com.lexxkit.skyprolexxkitquiz.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
 
 @Service
+@Qualifier("javaQuestionService")
 public class JavaQuestionService implements QuestionService {
-    private final Set<Question> questions;
+    private final QuestionRepository questionRepository;
 
-    public JavaQuestionService() {
-        this.questions = new HashSet<>();
-    }
-
-    public JavaQuestionService(Set<Question> questions) {
-        this.questions = questions;
+    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -29,40 +27,34 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-        boolean isAdded = questions.add(question);
-        if (!isAdded) {
-            throw new QuestionAlreadyAddedException();
-        }
-        return question;
+        return questionRepository.add(question);
     }
 
     @Override
     public Question remove(Question question) {
-        boolean isRemoved = questions.remove(question);
-        if (!isRemoved) {
-            throw new QuestionNotFoundException();
-        }
-        return question;
+        return questionRepository.remove(question);
     }
 
     @Override
     public Collection<Question> getAll() {
-        return Collections.unmodifiableSet(questions);
+        return questionRepository.getAll();
     }
 
     @Override
     public Question getRandomQuestion() {
-        if (questions.size() == 0) {
+        int repositorySize = questionRepository.getAll().size();
+
+        if (repositorySize == 0) {
             throw new JavaQuestionsIsEmptyException();
         }
-        int index = new Random().nextInt(questions.size());
+        int index = new Random().nextInt(repositorySize);
         return getQuestionByIndex(index);
     }
 
     private Question getQuestionByIndex(int index) {
-        if (index < 0 || index >= questions.size()) {
+        if (index < 0 || index >= questionRepository.getAll().size()) {
             throw new IndexOutOfBoundsException();
         }
-        return new ArrayList<>(questions).get(index);
+        return new ArrayList<>(questionRepository.getAll()).get(index);
     }
 }

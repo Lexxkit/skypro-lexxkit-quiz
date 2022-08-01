@@ -13,6 +13,7 @@ import java.util.Random;
 @Service
 @Qualifier("javaQuestionService")
 public class JavaQuestionService implements QuestionService {
+    private final Random rand = new Random();
     private final QuestionRepository questionRepository;
 
     public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
@@ -47,7 +48,7 @@ public class JavaQuestionService implements QuestionService {
         if (repositorySize == 0) {
             throw new JavaQuestionsIsEmptyException();
         }
-        int index = new Random().nextInt(repositorySize);
+        int index = rand.nextInt(repositorySize);
         return getQuestionByIndex(index);
     }
 

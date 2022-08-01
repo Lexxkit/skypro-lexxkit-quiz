@@ -13,6 +13,7 @@ import java.util.Random;
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
     private final int LIMIT = 10;
+    private final Random rand = new Random();
     @Override
     public Question add(String question, String answer) {
         throw new CustomMethodNotAllowedException();
@@ -35,7 +36,7 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        Random rand = new Random();
+
         char mathSign = MathSigns.MATH_SIGNS[rand.nextInt(MathSigns.MATH_SIGNS.length)];
         int numA = rand.nextInt(LIMIT) + 1;
         int numB = rand.nextInt(LIMIT) + 1;
